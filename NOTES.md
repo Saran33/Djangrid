@@ -1,7 +1,11 @@
 conda activate zenstra
 source djangridenv/bin/activate
+cd djangrid
 
 https://sendgrid.com/
+https://github.com/sendgrid/sendgrid-python
+https://github.com/sendgrid/sendgrid-python/blob/main/use_cases/kitchen_sink.md
+
 https://www.twilio.com/blog/build-email-newsletter-django-twilio-sendgrid
 
 https://www.codingforentrepreneurs.com/blog/sendgrid-email-settings-for-django/
@@ -76,3 +80,18 @@ python manage.py migrate
 11. Add the confirmation url to urlpatterns in djangrid/urls.py
 12. test on http://127.0.0.1:8000/subscribe
 13. Delete a subscriber: views.py and add it to urlpatterns in djangrid/urls.py
+14. Sending Newsletters: 
+- Create djangrid/uploaded_newsletters dir then add the dir as a MEDIA_URL in settings.py
+- Create a Newsletter model.
+```zsh
+python manage.py makemigrations
+python manage.py migrate
+```
+- Register the model in DjangridApp/admin.py
+15. Use the admin dashboard to upload HTML formatted newsletters (dashboard supports file uploads)
+`python manage.py runserver`
+http://127.0.0.1:8000/admin/
+- e.g. `<p>Test Email</p><p>You are reading my email newsletter, and this is one of those newsletters!</p>`  as test_email.html
+16. Add a send function to the Newsletter model.
+17. Invoke this method as an admin action in DjangridApp/admin.py, to make it availabe in the admin panel.
+- images/Send_Newsletter_django_admin_action.png

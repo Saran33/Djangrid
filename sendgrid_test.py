@@ -19,7 +19,9 @@ message = Mail(
     html_content='<strong>Test message</strong>')
 try:
     sg = SendGridAPIClient(SENDGRID_API_KEY)
-    response = sg.send(message)
+    # response = sg.send(message)
+    # response = sg.client.suppression.bounces.get()
+    response = sg.client._("suppression/bounces").get()
     print(response.status_code)
     print(response.body)
     print(response.headers)
