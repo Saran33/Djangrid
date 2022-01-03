@@ -131,3 +131,8 @@ sendgrid.env
 
 # Mac
 .DS_Store
+
+# Djangrid
+email_settings.py
+test_list_addrs.csv
+NOTES.md
