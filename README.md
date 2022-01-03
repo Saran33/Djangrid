@@ -73,15 +73,15 @@ python manage.py migrate
 Subscribers can also be manually added within the admin dashboard. This will not send an email notification for confirming the email address.
 - Subscribers can be added individually or by bulk uploading a csv containing the column names as per the example test_list.csv file.
 
-### List Segments
+### Create Segments
 - Subscribers can be grouped into segments based on their behaviour or properties, such as their geographical location, utilising [django-advanced-filters](https://github.com/modlinltd/django-advanced-filters)
-#### Create a segment
 - In Django admin, go to the `Profiles` tab and click the `Advanced Search` button. Filter profiles as per the below image:
 ![Advanced Search](images/advanced_search_example.png)
 - Click `Save & Filter Now`, then check the boxes for all the profiles returned by the search.
 - In the Profile Actions dropdown menu, select `Create segment from selected`, then press `Go` to create the segment.
 - The newly created segment should now be available in the `Segments` tab, located in the left app admin menu.
 - The segment will be named 'Segment ... + the current date & time'. Click on it to update the name and then hit save.
+![Create Segment](images/djangrid_create_segment.png)
 
 ### Creating a Campaign
 - A campaign represents an email either scheduled or submitted for immediate sending to a list or segment of user profiles.
@@ -90,7 +90,7 @@ Subscribers can also be manually added within the admin dashboard. This will not
 - To send the email in both plaintext and html, check both the `Send plaintext` and `Send html` boxes. This ensures maximum deliverability.
 - If the html file for the email has been uploaded, there is no need to check the `Use html template` box. This box is to be checked only if writing the email manually and using a template from the template library (that feature is not avialable yet).
 - Click `Save & Continue editing`, then click the `Submit` button to schedule the campigin for sending.
-
+![Submit Campaign](images/djangrid_submit_campaign.png)
 - To send the campiagn immediately, open a terminal in the Djangrid/djangrid directory and run: `./manage.py submit_campaign`.
 - The campaign should now be sent.
 

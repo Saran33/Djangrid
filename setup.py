@@ -24,6 +24,7 @@ setup(
         'django', 'sendgrid', 'sorl-thumbnail', 'django-tinymce', 'django-sendgrid-v5', 'django-extensions'
         'django-newsletter @ git+https://github.com/jazzband/django-newsletter.git#egg=django-newsletter',
         'django-advanced-filters @ git+https://github.com/Saran33/django-advanced-filters.git',
+        'python-crontab',
     ],
     #package_dir={"": "src"},
     # packages=find_packages(where="djangrid"),

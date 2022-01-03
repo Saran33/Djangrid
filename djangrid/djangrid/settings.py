@@ -165,11 +165,11 @@ MEDIA_URL = 'uploaded_newsletters/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
-FROM_EMAIL = 'saran@zenstrabiohealth.com'
-SENDER_NAME = 'Saran (Zenstra)'
+FROM_EMAIL = 'someone@example.com'
+SENDER_NAME = 'Your Name (Example CEO)'
 MAIL_FROM = f'{SENDER_NAME} <{FROM_EMAIL}>'
-REPLY_TO = 'suppport@zenstrabiohealth.com'
-# REPLY_TO = 'saran@zenstrabiohealth.com'
+# REPLY_TO = 'suppport@example.com'
+REPLY_TO = 'someone@example.com'
 load_dotenv('./sendgrid.env')
 SENDGRID_API_KEY = os.environ.get('SENDGRID_API_KEY')
 # print (SENDGRID_API_KEY)
@@ -195,11 +195,11 @@ NEWSLETTER_THUMBNAIL = 'sorl-thumbnail'
 # NEWSLETTER_THUMBNAIL = 'easy-thumbnails'
 NEWSLETTER_RICHTEXT_WIDGET = "tinymce.widgets.TinyMCE"
 SITE_ID = 1
-# # Amount of seconds to wait between each email. Here 100ms is used.
-# NEWSLETTER_EMAIL_DELAY = 0.1
-# # Amount of seconds to wait between each batch. Here one minute is used.
-# NEWSLETTER_BATCH_DELAY = 60
-# # Number of emails in one batch
-# NEWSLETTER_BATCH_SIZE = 100
+# Amount of seconds to wait between each email. Here 100ms is used.
+NEWSLETTER_EMAIL_DELAY = 0.1618
+# Amount of seconds to wait between each batch. Here one minute is used.
+NEWSLETTER_BATCH_DELAY = 61.8
+# Number of emails in one batch
+NEWSLETTER_BATCH_SIZE = 62
 
 DEFAULT_AUTO_FIELD = "django.db.models.AutoField"

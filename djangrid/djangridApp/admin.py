@@ -21,13 +21,13 @@ try:
 except ImportError:  # Django < 1.10
     from django.views.i18n import javascript_catalog
     HAS_CBV_JSCAT = False
-from .admin_utils import ExtendibleModelAdminMixin, make_profile, ExportCsvMixin, ExportSegmentCsvMixin
+from .admin_utils import (ExtendibleModelAdminMixin, make_profile,
+    ExportCsvMixin, ExportSegmentCsvMixin, CreateSegmentMixin
+)
 from .admin_forms import (
     ProfileAdminForm, ImportForm, ConfirmForm, SegmentAdminForm, CampaignAdminForm
 )
 from .admin_filters import SuppressedListFilter, ProfileAdvancedFiltersMixin
-from advanced_filters.admin import FixAdminAdvancedFiltersMixin
-import csv
 
 # Construct URL's for icons
 ICON_URLS = {
@@ -88,7 +88,8 @@ class NewsletterAdminLinkMixin:
 
 
 @admin.register(Profile)
-class ProfileAdmin(ExportCsvMixin, ProfileAdvancedFiltersMixin, ExtendibleModelAdminMixin, admin.ModelAdmin):
+class ProfileAdmin(CreateSegmentMixin, ExportCsvMixin, ProfileAdvancedFiltersMixin,
+                    ExtendibleModelAdminMixin, admin.ModelAdmin):
     def admin_profile(self, obj):
         opts = Profile._meta
         profile = obj.profile
@@ -115,7 +116,8 @@ class ProfileAdmin(ExportCsvMixin, ProfileAdvancedFiltersMixin, ExtendibleModelA
         'ip', 'subscribe_date', 'unsubscribe_date', 'conf_num'
     )
     date_hierarchy = 'subscribe_date'
-    actions = ['make_subscribed', 'make_unsubscribed', 'make_confirmed', 'make_unconfirmed', 'export_as_csv']
+    actions = ['make_subscribed', 'make_unsubscribed', 'make_confirmed',
+                'make_unconfirmed', 'create_segment', 'export_as_csv']
     # exclude = ['unsubscribed']
 
     advanced_filter_fields = (
@@ -217,6 +219,10 @@ class ProfileAdmin(ExportCsvMixin, ProfileAdvancedFiltersMixin, ExtendibleModelA
             ) % rows_updated
         )
     make_unsubscribed.short_description = _("Unsubscribe selected users")
+
+    """ Views """
+    def update(self, request, object_id):
+        segment = self._getobj(request, object_id)
 
     """ Views """
     def profiles_import(self, request):

@@ -3,8 +3,8 @@ from functools import update_wrapper
 from django.contrib.admin.utils import unquote
 from django.http import Http404
 from django.utils.encoding import force_str
-from django.utils.translation import gettext as _
-from .models import Profile
+from django.utils.translation import gettext as _, ngettext
+from .models import Profile, Segment
 from django.http import HttpResponse
 from django.utils.timezone import now, localtime
 import csv
@@ -108,3 +108,24 @@ class ExportSegmentCsvMixin:
         return response
 
     export_as_csv.short_description = "Export Selected to CSV"
+
+
+class CreateSegmentMixin:
+    def create_segment(self, request, queryset):
+        profiles_added = queryset.count()
+        local_t = localtime(now()).strftime("%Y-%m-%d__%H_%M_%S")
+        segment_name = f'Segment_{local_t}'
+        segment = Segment(segment_name=segment_name, created_at=now())
+        segment.save()
+        segment.profiles.set(queryset)
+        segment.save()
+        self.message_user(
+            request,
+            ngettext(
+                f"{segment_name} has been successfully created from %d profile.",
+                f"{segment_name} has been successfully created from %d profiles.",
+                profiles_added
+            ) % profiles_added
+        )
+
+    create_segment.short_description = "Create segment from selected"
