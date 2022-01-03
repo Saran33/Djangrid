@@ -1,0 +1,34 @@
+{% load i18n %}<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="utf-8">
+	<title>{{ message.title }}</title>
+</head>
+<body>
+    <h2>{{ message.title }}</h2>
+
+    {% include thumbnail_template %}
+
+    <div>{{ contents|safe }}</div>
+    <ul>
+        <li><a href="{ unsub_url }">{% trans "Unsubscribe" %}</a></li>
+    </ul>
+    {% if attachment_links %}
+        {% for att in message.attachments.all %}
+            {% if forloop.first %}
+                <strong>{% trans "Attachments" %}</strong>
+                <table>
+            {% endif %}
+            <tr>
+                <td>
+                    &#128206; <a href="{{ att.file.url }}">{{ att.file_name }}</a> ({{ att.file.size|filesizeformat }})
+                </td>
+            </tr>
+            {% if forloop.last %}
+                </table>
+            {% endif %}
+        {% endfor %}
+    {% endif %}
+</body>
+</html>
