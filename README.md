@@ -105,3 +105,6 @@ Subscribers can also be manually added within the admin dashboard. This will not
 - For more crontab timing format examples, see: https://crontab.guru/examples.html
 - To check scheduled crontab jobs:
 `crontab -l`
+
+### TODO
+- Allow cron jobs to be created in Django, based on selected 'send_datetime' for each campaign, using [python-crontab](https://pypi.org/project/python-crontab/)
