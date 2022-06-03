@@ -12,7 +12,6 @@ The repository can be found at:
 
 # SendGrid API Setup
 - Create account and API key.
-- `pip install python-dotenv` https://github.com/theskumar/python-dotenv
 e.g. (not a real API key)
 ```zsh
 cd djangrid # navigate to the Djangrid/djangrid directory

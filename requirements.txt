@@ -1,7 +1,7 @@
 asgiref==3.4.1
 chardet==4.0.0
 Django==4.0
-django-advanced-filters @ git+https://github.com/modlinltd/django-advanced-filters.git
+django-advanced-filters @ git+https://github.com/Saran33/django-advanced-filters.git
 django-braces==1.14.0
 django-extensions==3.1.5
 -e git+https://github.com/jazzband/django-newsletter.git#egg=django_newsletter
