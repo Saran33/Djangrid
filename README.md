@@ -5,28 +5,6 @@ Djangrid is a fork of [django-newsletter](https://github.com/jazzband/django-new
 The repository can be found at:
 [Github-Djangrid](https://github.com/Saran33/Djangrid/)
 
-# Create Environment
-Create either a conda env or venv or virtualenv (or both a conda env and virtualenv to use python latest version, if your base version is not the latest).
-`python --version`
-### Create Env
-`conda create --name djangenv python=3.10`
-`conda activate djangenv`
-#### Venv
-`python3 -m venv djangridenv`
-### Virtulenv
-`pip install virtualenv`
-1. Create virtualenv:
-`virtualenv djangridenv --python=python3.10`
-2. Launch venv:
-windows:
-`./djangridenv/scripts/activate`
-unix:
-`source djangridenv/bin/activate`
-Exit venv:
-`deactivate`
-Delete venv:
-`rm -rf djangridenv`
-
 #### To install from git:
 `mkdir Djangrid`
 `cd Djangrid`
