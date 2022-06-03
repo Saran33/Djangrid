@@ -1,0 +1,22 @@
+asgiref==3.4.1
+chardet==4.0.0
+Django==4.0
+django-advanced-filters @ git+https://github.com/modlinltd/django-advanced-filters.git
+django-braces==1.14.0
+django-extensions==3.1.5
+-e git+https://github.com/jazzband/django-newsletter.git#egg=django_newsletter
+django-sendgrid-v5==1.2.0
+django-tinymce==3.4.0
+ldif3==3.1.1
+Pillow==8.4.0
+python-card-me==0.9.3
+python-dateutil==2.8.2
+python-dotenv==0.19.2
+python-http-client==3.3.4
+sendgrid==6.9.3
+simplejson==3.17.6
+six==1.16.0
+sorl-thumbnail==12.7.0
+sqlparse==0.4.2
+starkbank-ecdsa==2.0.3
+unicodecsv==0.14.1
