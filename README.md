@@ -68,7 +68,7 @@ Subscribers can also be manually added within the admin dashboard. This will not
 - If the html file for the email has been uploaded, there is no need to check the `Use html template` box. This box is to be checked only if writing the email manually and using a template from the template library (that feature is not avialable yet).
 - Click `Save & Continue editing`, then click the `Submit` button to schedule the campigin for sending.
 ![Submit Campaign](images/djangrid_submit_campaign.png)
-- To send the campiagn immediately, open a terminal in the Djangrid/djangrid directory and run: `./manage.py submit_campaign`.
+- To send the campiagn immediately, open a terminal in the Djangrid/djangrid directory and run: `python manage.py submit_campaign`.
 - The campaign should now be sent.
 
 ### Scheduling a Campaign
