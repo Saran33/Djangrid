@@ -33,7 +33,7 @@ python manage.py migrate
 ```
 3. `python manage.py runserver`
 - Go to http://127.0.0.1:8000/admin/ and log in.
-4. test the sign-up screen at: http://127.0.0.1:8000/subscribe
+4. test the sign-up screen at: http://127.0.0.1:8000/newsletter/subscribe/
 - Change the name of the site in the `Sites` tab of the Admin Panel from 'example.com' to your site.
 - Enter an email address to subscribe with.
 - When you recieve a confirmation email, click the link to confirm.
@@ -72,7 +72,7 @@ Subscribers can also be manually added within the admin dashboard. This will not
 - The campaign should now be sent.
 
 ### Scheduling a Campaign
-- To schedule a campaign for futre sending, create a crontab entry for the submit_campaign management command.
+- To schedule a campaign for future sending, create a crontab entry for the submit_campaign management command.
 `EDITOR=nano crontab -e`
 - e.g. to send it in 15 minutes time:
 `*/15 * * * * (cd <project_root> && <path_to_virtualenv>/bin/python3.10 <project_root>/manage.py submit_campaign 1>/dev/null 2>&1)`
