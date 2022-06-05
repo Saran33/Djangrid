@@ -18,6 +18,7 @@ from django.utils.translation import gettext
 from django.utils.timezone import now, localtime
 from django.urls import reverse
 from .utils import make_activation_code
+from django.template import engines
 
 logger = logging.getLogger(__name__)
 
@@ -42,7 +43,18 @@ class Profile(models.Model):
     def set_name(self, name):
         if not self.user:
             self.name_field = name
+
+    def get_first_name(self):
+        if self.user:
+            return self.user.get_short_name()
+        return self.name.split()[0] if self.name else ''
+
+    def set_first_name(self):
+        if not self.user:
+            self.first_name = self.name.split()[0] if self.name else ''
+
     name = property(get_name, set_name)
+    first_name = property(get_first_name, set_first_name)
 
     email = models.EmailField(
         db_column='email', verbose_name=_('e-mail'), db_index=True,
@@ -171,15 +183,19 @@ class Newsletter(models.Model):
         sg = SendGridAPIClient(settings.SENDGRID_API_KEY)
         from_email = (settings.FROM_EMAIL, settings.SENDER_NAME)
         # print(from_email)
+        django_engine = engines['django']
+        template = django_engine.from_string(contents)
         for sub in profiles:
+            context = {'first_name': sub.first_name}
+            html_body = template.render(context=context, request=None)
             message = Mail(
                     from_email=from_email,
                     to_emails=sub.email,
                     subject=self.subject,
-                    html_content=contents + (
+                    html_content=html_body + (
                         # '<br><a href="{}/delete/?email={}&conf_num={}">Unsubscribe</a>.').format(
                             # request.build_absolute_uri(''),
-                        '<br><a href="{}?email={}&conf_num={}">Unsubscribe</a>.').format(
+                        '<br><br><br><small><a href="{}?email={}&conf_num={}">Unsubscribe</a><small>').format(
                             request.build_absolute_uri('/newsletter/delete/'),
                             sub.email,
                             sub.conf_num))
@@ -440,8 +456,11 @@ class Campaign(models.Model):
             'date': self.publish_date,
             'STATIC_URL': settings.STATIC_URL,
             'MEDIA_URL': settings.MEDIA_URL,
-            'unsub_url': unsub_url
+            'unsub_url': unsub_url,
+            'first_name':recipient.first_name
         }
+        unsub = ('<br><br><br><small><a href="{}">Unsubscribe</a><small>').format(unsub_url)
+
         if self.send_plain:
             plaintext = text_template.render(message_dict)
 
@@ -457,12 +476,20 @@ class Campaign(models.Model):
                 if self.use_template:
                     html_content = html_template.render(message_dict)
                 else:
-                    html_content = contents + ('<br><a href="{}">Unsubscribe</a>.').format(unsub_url)
+                    django_engine = engines['django']
+                    template = django_engine.from_string(contents)
+                    context = {'first_name':recipient.first_name}
+                    html_body = template.render(context=context, request=None)
+                    html_content = html_body + unsub
 
                 message.attach_alternative(html_content, "text/html")
         
         else:
-            html_content = contents + ('<br><a href="{}">Unsubscribe</a>.').format(unsub_url)
+            django_engine = engines['django']
+            template = django_engine.from_string(contents)
+            context = {'first_name':recipient.first_name}
+            html_body = template.render(context=context, request=None)
+            html_content = html_body + unsub
             message = EmailMessage(
                 subject, html_content,
                 from_email=self.get_sender(),
