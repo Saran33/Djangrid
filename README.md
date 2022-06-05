@@ -1,6 +1,7 @@
 # Djangrid
 #### Django email marketing web app utilising the SendGrid API
 Djangrid is a fork of [django-newsletter](https://github.com/jazzband/django-newsletter), with a slightly different process design, similar to [Klaviyo](https://www.klaviyo.com/). Djangrid has additional features such as the ability to create list segments based on subscribers' behaviour or properties, the ability for bulk CSV uploads to include properties such as location or other metadata to create user Profile fields dynamically, and the ability to schedule campaigns from the Django Admin panel without needing to manually add crontab entries.
+It also allows the use of Django HTML template tags for emails. e.g. "Hi {{ first_name }}".
 
 The repository can be found at:
 [Github-Djangrid](https://github.com/Saran33/Djangrid/)
