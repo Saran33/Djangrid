@@ -109,7 +109,7 @@ class ProfileAdmin(CreateSegmentMixin, ExportCsvMixin, ProfileAdvancedFiltersMix
         SuppressedListFilter, 'confirmed', 'subscribe_date', 'unsubscribed',
     )
     search_fields = (
-        'name_field', 'email_field', 'user__first_name', 'user__last_name',
+        'name_field', 'email', 'user__first_name', 'user__last_name',
         'user__email'
     )
     readonly_fields = (
